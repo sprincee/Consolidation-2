@@ -1,5 +1,6 @@
 #game_v2
 
+
 import os
 import time
 
@@ -37,3 +38,16 @@ def start():
         os.system('cls')
 
     return username
+
+def credits(username):
+    print("Credits:")
+    print("  ")
+    print("Creative Director: Mahad Khan")
+    print("Lead Developer: Mahad Khan")
+    print("Primary Play-Tester: Mahad Khan")
+    time.sleep(2)
+    os.system('cls')
+    time.sleep(2)
+    print(f"Thanks for playing, {username}!")
+    print("\nFinally, if you got this far, you should read Eldrow backwards.")
+    print("\nIt should be a nice surprise. . .")
