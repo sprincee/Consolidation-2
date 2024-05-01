@@ -19,8 +19,16 @@ color_bank = ["white", "black", "red", "blue", "yellow"]
 #Default Start
 username = game_v2.start()
 
-#A function to select a theme
+
 def choose_theme():
+    '''
+
+    A function to select the theme.
+
+    Arguements:
+        - None.
+    
+    '''
     print(f"{username}, here are the available themes:\n")
     time.sleep(1)
     for n, theme in enumerate(theme_bank, start= 1):
@@ -35,8 +43,15 @@ def choose_theme():
         except ValueError:
             print("Invalid input. Enter a number.")
 
-#A function to choose a word from a selected theme
 def choose_words(theme_choice):
+    '''
+    
+    A function to choose a word from a selected theme.
+
+    Arguements:
+        - theme_choice (int): the numerical repersentation of each theme.
+    
+    '''
     if theme_choice == 1:
         return random.choice(fruit_bank)
     if theme_choice == 2:
@@ -44,13 +59,32 @@ def choose_words(theme_choice):
     if theme_choice == 3:
         return random.choice(color_bank)
 
-#A function used return the count of a certain letter within the chosen word
+
 def check_letter(word, letter):
+    '''
+    
+    A function used to return the count of a certain letter within the chosen word.
+
+    Arguements:
+        - word (str): The string which is being counted from.
+        - letter (str): The character whose occurances are being counted. 
+    
+    '''
     return word.count(letter)
 
 
-#A function... which codes game-behavior... aka, the game itself!
+
 def game_begin(theme_choice, chosen_word):
+    '''
+
+    A function for starting the game with the specified theme and chosen word.
+
+    Arguements:
+        - theme_choice (str): the theme chosen for the game.
+        - chosen_word (str): the word chosen for the game.
+
+    
+    '''
     guessed_word = ['_'] * len(chosen_word) #Formatting
     guessed_letters = set()
 
