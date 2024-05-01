@@ -92,7 +92,74 @@ def choose_words(theme_choice):
 def check_letter(word, letter):
   return word.count(letter)
 
+#A function... which codes game-behavior... aka, the game itself!
+def game_begin(theme_choice, chosen_word):
+    guessed_word = ['_'] * len(chosen_word) #Formatting
+    guessed_letters = set()
 
+    #Initializing player's guesses to 0
+    letter_guesses = 0
+    word_guesses = 0
+
+   
+
+    while '_' in guessed_word and word_guesses < 3:
+        print("\nSecret Word:", " ".join(guessed_word))
+        print("Guessed Letters:", ", ".join(guessed_letters))
+
+        guess = input("\nGuess a letter or the whole word: ").lower()
+
+        if len(guess) == 1 and guess.isalpha():
+            if guess in guessed_letters:
+                print("You already guessed that letter.")
+                time.sleep(2)
+                os.system('cls')
+            else:
+                guessed_letters.add(guess)
+                occurences = check_letter(chosen_word, guess)
+                if occurences:
+                    print(f"There are {occurences} occurrence(s) of the letter '{guess}' in the word.")
+                    time.sleep(2)
+                    os.system('cls')
+                    for i in range(len(chosen_word)):
+                        if chosen_word[i] == guess:
+                            guessed_word[i] = guess
+                else:
+                    print(f"The letter '{guess}' is not in the word.")
+                    time.sleep(2)
+                    os.system('cls')
+                letter_guesses += 1
+        elif guess == chosen_word and guess.isalpha():
+            time.sleep(1)
+            os.system('cls')
+            time.sleep(1)
+            print("\nCongratulations! You guessed the word correctly.")
+            break
+        elif len(guess) != len(chosen_word) and guess != chosen_word:
+            print("\nIncorrect guess.")
+            time.sleep(1)
+            os.system('cls')
+            word_guesses += 1
+            if word_guesses == 3:
+                print("You've used all your word guesses. Game over!")
+                time.sleep(2)
+                os.system('cls')
+                break
+        elif len(guess) == len(chosen_word) and guess != chosen_word:
+            print("\nIncorrect guess.")
+            time.sleep(1)
+            os.system('cls')
+            word_guesses += 1
+            if word_guesses == 3:
+                print("You've used all your word guesses. Game over!")
+                time.sleep(2)
+                os.system('cls')
+                break
+
+    print(f"The secret word was: {chosen_word}")
+    print(f"Number of letter guesses: {letter_guesses}")
+    time.sleep(5)
+    os.system('cls')
     
     
     
@@ -104,5 +171,6 @@ chosen_theme = choose_theme()
 time.sleep(1)
 os.system("cls")
 chosen_word = choose_words(chosen_theme)
-
+time.sleep(1)
+game_begin(chosen_theme, chosen_word)
 
