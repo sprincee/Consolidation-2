@@ -44,26 +44,23 @@ import random
 import time
 import os
 
-#Custom-Imports (coded by Mahad)
+#Custom-Imports (coded by Mahad-- reused from Consolidation 1/Ethics Game!
 import game_v2
-
-
 
 #Establishing a bank of themes for the game
 theme_bank = ["Fruits", "Animals", "Colors"]
 
 #Establishing banks for each theme
-fruit_bank = ["apple", "banana", "orange", "grape", "strawberry"]
+fruit_bank = ["strawberry", "apple", "orange", "grape", "banana"]
 animal_bank = ["lion", "giraffe", "bison", "tiger", "elephant"]
 color_bank = ["white", "black", "red", "blue", "yellow"]
-
 
 #Default Start
 username = game_v2.start()
 
 #A function to select a theme
 def choose_theme():
-  print(f"{username}, here are the available themes:\n")
+    print(f"{username}, here are the available themes:\n")
     time.sleep(1)
     for n, theme in enumerate(theme_bank, start= 1):
         print(f"{n}. {theme}")
@@ -77,20 +74,18 @@ def choose_theme():
         except ValueError:
             print("Invalid input. Enter a number.")
 
-
 #A function to choose a word from a selected theme
 def choose_words(theme_choice):
     if theme_choice == 1:
-        #print('Testing a test-case.') #Testcase #1
         return random.choice(fruit_bank)
     if theme_choice == 2:
-        #print('Testing a test-case again.') #Testcase #2
         return random.choice(animal_bank)
     if theme_choice == 3:
         return random.choice(color_bank)
 
 def check_letter(word, letter):
-  return word.count(letter)
+    return word.count(letter)
+
 
 #A function... which codes game-behavior... aka, the game itself!
 def game_begin(theme_choice, chosen_word):
@@ -104,7 +99,7 @@ def game_begin(theme_choice, chosen_word):
    
 
     while '_' in guessed_word and word_guesses < 3:
-        print("\nSecret Word:", " ".join(guessed_word))
+        print("Secret Word:", " ".join(guessed_word))
         print("Guessed Letters:", ", ".join(guessed_letters))
 
         guess = input("\nGuess a letter or the whole word: ").lower()
@@ -133,9 +128,9 @@ def game_begin(theme_choice, chosen_word):
             time.sleep(1)
             os.system('cls')
             time.sleep(1)
-            print("\nCongratulations! You guessed the word correctly.")
+            print("Congratulations! You guessed the word correctly.")
             break
-        elif len(guess) != len(chosen_word) and guess != chosen_word:
+        elif len(guess) != len(chosen_word) and guess != chosen_word and guess.isalpha():
             print("\nIncorrect guess.")
             time.sleep(1)
             os.system('cls')
@@ -145,7 +140,7 @@ def game_begin(theme_choice, chosen_word):
                 time.sleep(2)
                 os.system('cls')
                 break
-        elif len(guess) == len(chosen_word) and guess != chosen_word:
+        elif len(guess) == len(chosen_word) and guess != chosen_word and guess.isalpha():
             print("\nIncorrect guess.")
             time.sleep(1)
             os.system('cls')
@@ -155,17 +150,21 @@ def game_begin(theme_choice, chosen_word):
                 time.sleep(2)
                 os.system('cls')
                 break
+        elif guess.isdigit():
+            print("Invalid input. Please enter a single letter or a word-guess.")
+            time.sleep(1)
+            os.system('cls')
+        elif len(guess) == 0:
+            print("Invalid input. Please enter a single letter or a word-guess.")
+            time.sleep(1)
+            os.system('cls')
 
-    print(f"The secret word was: {chosen_word}")
+    print(f"\nThe secret word was: {chosen_word}")
     print(f"Number of letter guesses: {letter_guesses}")
+    print(f"Number of word guesses: {word_guesses}")
     time.sleep(5)
     os.system('cls')
-    
-    
-    
-    
-    
-    
+
 #Function-Caller:
 chosen_theme = choose_theme()
 time.sleep(1)
@@ -173,4 +172,6 @@ os.system("cls")
 chosen_word = choose_words(chosen_theme)
 time.sleep(1)
 game_begin(chosen_theme, chosen_word)
+game_v2.credits(username)
+
 
