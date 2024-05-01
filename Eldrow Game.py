@@ -89,7 +89,10 @@ def choose_words(theme_choice):
     if theme_choice == 3:
         return random.choice(color_bank)
 
-    return theme_choice   
+def check_letter(word, letter):
+  return word.count(letter)
+
+
     
     
     
