@@ -38,3 +38,68 @@ A note for grading:
 
 
 '''
+
+#Imports
+import random
+import time
+import os
+
+#Custom-Imports (coded by Mahad)
+import game_v2
+
+
+
+#Establishing a bank of themes for the game
+theme_bank = ["Fruits", "Animals", "Colors"]
+
+#Establishing banks for each theme
+fruit_bank = ["apple", "banana", "orange", "grape", "strawberry"]
+animal_bank = ["lion", "giraffe", "bison", "tiger", "elephant"]
+color_bank = ["white", "black", "red", "blue", "yellow"]
+
+
+#Default Start
+username = game_v2.start()
+
+#A function to select a theme
+def choose_theme():
+  print(f"{username}, here are the available themes:\n")
+    time.sleep(1)
+    for n, theme in enumerate(theme_bank, start= 1):
+        print(f"{n}. {theme}")
+    while True:
+        try:
+            choice = int(input("\nChoose a theme: "))
+            if 1 <= choice <= len(theme_bank):
+                return choice
+            else:
+                print("Invalid choice. Enter a number within the valid range.")
+        except ValueError:
+            print("Invalid input. Enter a number.")
+
+
+#A function to choose a word from a selected theme
+def choose_words(theme_choice):
+    if theme_choice == 1:
+        #print('Testing a test-case.') #Testcase #1
+        return random.choice(fruit_bank)
+    if theme_choice == 2:
+        #print('Testing a test-case again.') #Testcase #2
+        return random.choice(animal_bank)
+    if theme_choice == 3:
+        return random.choice(color_bank)
+
+    return theme_choice   
+    
+    
+    
+    
+    
+    
+#Function-Caller:
+chosen_theme = choose_theme()
+time.sleep(1)
+os.system("cls")
+chosen_word = choose_words(chosen_theme)
+
+
